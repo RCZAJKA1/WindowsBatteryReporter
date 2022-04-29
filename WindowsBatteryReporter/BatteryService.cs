@@ -2,17 +2,18 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <inheritdoc cref="IBatteryService"/>
     internal sealed class BatteryService : IBatteryService
     {
-        private readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private const string C_PATH = "C:\\BatteryReports";
 
         /// <inheritdoc/>
-        public void CreateBatteryReportAsync()
+        public async Task CreateBatteryReportAsync()
         {
             DateTime now = DateTime.Now;
-            string filePath = $"{this.DesktopPath}\\battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}.html";
+            string filePath = $"{C_PATH}\\battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}{now.Second}.html";
             string command = $"powercfg /batteryreport /output \"{filePath}\"";
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/c " + command)

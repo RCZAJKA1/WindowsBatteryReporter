@@ -1,6 +1,6 @@
 ﻿namespace WindowsBatteryReporter
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -64,13 +64,13 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(974, 729);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // Form1
+            // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(974, 729);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1000, 800);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Battery Reporter";
             this.tableLayoutPanel1.ResumeLayout(false);

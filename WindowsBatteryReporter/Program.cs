@@ -29,7 +29,7 @@ namespace WindowsBatteryReporter
             IHost host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<MainForm>());
         }
 
         /// <summary>
@@ -39,9 +39,11 @@ namespace WindowsBatteryReporter
         static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) => {
-                    services.AddTransient<IBatteryService, BatteryService>();
-                    services.AddTransient<Form1>();
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddTransient<IBatteryService, BatteryService>()
+                    .AddTransient<MainForm>()
+                    .AddTransient<IBatteryView, BatteryView>();
                 });
         }
     }

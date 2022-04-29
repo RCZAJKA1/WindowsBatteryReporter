@@ -9,20 +9,22 @@
     /// <summary>
     ///     The main form.
     /// </summary>
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private readonly ILogger logger;
         private readonly IBatteryService batteryService;
+        private readonly IBatteryView batteryView;
 
         /// <summary>
-        ///     Creates a new instance of the <see cref="Form1"/> class.
+        ///     Creates a new instance of the <see cref="MainForm"/> class.
         /// </summary>
-        public Form1(ILogger<Form1> logger, IBatteryService batteryService)
+        public MainForm(ILogger<MainForm> logger, IBatteryService batteryService, IBatteryView batteryView)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.batteryService = batteryService ?? throw new ArgumentNullException(nameof(batteryService));
+            this.batteryView = batteryView ?? throw new ArgumentNullException(nameof(batteryView));
             
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -30,10 +32,10 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The event arguments.</param>
-        private void buttonCreateReport_Click(object sender, EventArgs e)
+        private async void buttonCreateReport_Click(object sender, EventArgs e)
         {
             this.buttonCreateReport.Enabled = false;
-            this.batteryService.CreateBatteryReportAsync();
+            await this.batteryService.CreateBatteryReportAsync();
             this.buttonCreateReport.Enabled = true;
         }
     }
