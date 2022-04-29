@@ -43,7 +43,7 @@ namespace WindowsBatteryReporter
                 {
                     services.AddTransient<IBatteryService, BatteryService>()
                     .AddTransient<MainForm>()
-                    .AddTransient<IBatteryView, BatteryView>();
+                    .AddTransient<IMainFormView, MainFormView>();
                 });
         }
     }
