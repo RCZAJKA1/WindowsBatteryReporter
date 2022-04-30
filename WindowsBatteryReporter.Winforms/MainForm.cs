@@ -38,10 +38,14 @@
             this.SetCreateReportButtonEnabled(true);
         }
 
+        /// <summary>
+        ///     Enables or disables the create report button.
+        /// </summary>
+        /// <param name="enable">The bool that determines if the button is enabled or disabled.</param>
         public void SetCreateReportButtonEnabled(bool enable)
         {
-            Action safeAction = new Action(() => { this.buttonCreateReport.Enabled = this.Enabled; });
-            this.buttonCreateReport.EnsureControlThreadSynchronization(safeAction);
+            Action action = new Action(() => { this.buttonCreateReport.Enabled = enable; });
+            this.buttonCreateReport.EnsureControlThreadSynchronization(action);
         }
     }
 }

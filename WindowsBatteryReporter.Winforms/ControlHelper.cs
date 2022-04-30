@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="control">The control.</param>
         /// <param name="action">The action to perform.</param>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">Throws if the control is null.</exception>
         internal static void EnsureControlThreadSynchronization(this Control control, Action action)
         {
             if (control == null)
