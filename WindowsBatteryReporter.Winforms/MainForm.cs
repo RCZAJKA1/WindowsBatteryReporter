@@ -5,21 +5,29 @@
 
     using Microsoft.Extensions.Logging;
 
+    using WindowsBatteryReporter.Winforms;
+
     /// <summary>
     ///     The main form.
     /// </summary>
     public partial class MainForm : Form, IMainFormView
     {
-        private readonly ILogger logger;
-        private readonly IBatteryService batteryService;
+        private readonly ILogger _logger;
+        private readonly IMainFormController _mainFormController;
+
+        /// <inheritdoc/>
+        public bool CreateReportButtonEnabled { get; set; }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="MainForm"/> class.
         /// </summary>
-        public MainForm(ILogger<MainForm> logger, IBatteryService batteryService)
+        /// <param name="logger">The logger.</param>
+        /// <param name="mainFormController">The main form controller.</param>
+        /// <exception cref="ArgumentNullException">Throws if any injected dependencies are null.</exception>
+        public MainForm(ILogger<MainForm> logger, IMainFormController mainFormController)
         {
-            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.batteryService = batteryService ?? throw new ArgumentNullException(nameof(batteryService));
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._mainFormController = mainFormController ?? throw new ArgumentNullException(nameof(mainFormController));
 
             this.InitializeComponent();
         }
@@ -31,21 +39,9 @@
         /// <param name="e">The event arguments.</param>
         private void buttonCreateReport_Click(object sender, EventArgs e)
         {
-            this.logger.LogInformation("Create report button clicked.");
+            this._logger.LogInformation("Create report button clicked.");
 
-            this.SetCreateReportButtonEnabled(false);
-            this.batteryService.CreateBatteryReport();
-            this.SetCreateReportButtonEnabled(true);
-        }
-
-        /// <summary>
-        ///     Enables or disables the create report button.
-        /// </summary>
-        /// <param name="enable">The bool that determines if the button is enabled or disabled.</param>
-        public void SetCreateReportButtonEnabled(bool enable)
-        {
-            Action action = new Action(() => { this.buttonCreateReport.Enabled = enable; });
-            this.buttonCreateReport.EnsureControlThreadSynchronization(action);
+            this._mainFormController.CreateBatteryReport();
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿namespace WindowsBatteryReporter
 {
+    /// <inheritdoc cref="IMainFormView"/>
     internal sealed class MainFormView : IMainFormView
     {
-        public void SetCreateReportButtonEnabled(bool enable)
-        {
-
-        }
+        /// <inheritdoc/>
+        public bool CreateReportButtonEnabled { get; set; }
     }
 }

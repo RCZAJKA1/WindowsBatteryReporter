@@ -27,6 +27,8 @@
             {
                 control.Invoke(action);
             }
+
+            action.Invoke();
         }
     }
 }

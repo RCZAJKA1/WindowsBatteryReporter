@@ -6,6 +6,8 @@ namespace WindowsBatteryReporter
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using WindowsBatteryReporter.Winforms;
+
     /// <summary>
     ///     The program main entry point.
     /// </summary>
@@ -29,7 +31,8 @@ namespace WindowsBatteryReporter
             IHost host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(ServiceProvider.GetRequiredService<MainForm>());
+            MainForm mainForm = ServiceProvider.GetRequiredService<MainForm>();
+            Application.Run(mainForm);
         }
 
         /// <summary>
@@ -41,9 +44,11 @@ namespace WindowsBatteryReporter
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddTransient<IBatteryService, BatteryService>()
+                    services
                     .AddTransient<MainForm>()
-                    .AddTransient<IMainFormView, MainFormView>();
+                    .AddTransient<IBatteryService, BatteryService>()
+                    .AddTransient<IMainFormView, MainFormView>()
+                    .AddTransient<IMainFormController, MainFormController>();
                 });
         }
     }
