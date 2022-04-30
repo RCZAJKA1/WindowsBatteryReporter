@@ -24,23 +24,24 @@
             this.InitializeComponent();
         }
 
-        public void SetCreateReportButtonEnabled(bool enable)
-        {
-            this.buttonCreateReport.Enabled = enable;
-        }
-
         /// <summary>
         ///     Handles the button click event for creating a battery report.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The event arguments.</param>
-        private async void buttonCreateReport_Click(object sender, EventArgs e)
+        private void buttonCreateReport_Click(object sender, EventArgs e)
         {
             this.logger.LogInformation("Create report button clicked.");
 
             this.SetCreateReportButtonEnabled(false);
-            await this.batteryService.CreateBatteryReportAsync();
+            this.batteryService.CreateBatteryReport();
             this.SetCreateReportButtonEnabled(true);
+        }
+
+        public void SetCreateReportButtonEnabled(bool enable)
+        {
+            Action safeAction = new Action(() => { this.buttonCreateReport.Enabled = this.Enabled; });
+            this.buttonCreateReport.EnsureControlThreadSynchronization(safeAction);
         }
     }
 }

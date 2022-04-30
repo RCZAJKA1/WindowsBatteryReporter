@@ -2,15 +2,14 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     /// <inheritdoc cref="IBatteryService"/>
-    internal sealed class BatteryService : IBatteryService
+    public sealed class BatteryService : IBatteryService
     {
         private const string C_PATH = "C:\\BatteryReports";
 
         /// <inheritdoc/>
-        public async Task CreateBatteryReportAsync()
+        public void CreateBatteryReport()
         {
             DateTime now = DateTime.Now;
             string filePath = $"{C_PATH}\\battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}{now.Second}.html";
