@@ -2,17 +2,27 @@
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
 
     /// <inheritdoc cref="IBatteryService"/>
     public sealed class BatteryService : IBatteryService
     {
-        private const string C_PATH = "C:\\BatteryReports";
-
         /// <inheritdoc/>
-        public void CreateBatteryReport()
+        public void CreateBatteryReport(string folderPath)
         {
+            if (folderPath == null)
+            {
+                throw new ArgumentNullException(nameof(folderPath));
+            }
+
+            if (string.IsNullOrWhiteSpace(folderPath))
+            {
+                throw new ArgumentException("The argument cannot be empty or only contain white space.", nameof(folderPath));
+            }
+
             DateTime now = DateTime.Now;
-            string filePath = $"{C_PATH}\\battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}{now.Second}.html";
+            string fileName = $"battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}{now.Second}.html";
+            string filePath = Path.Combine(folderPath, fileName);
             string command = $"powercfg /batteryreport /output \"{filePath}\"";
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/c " + command)

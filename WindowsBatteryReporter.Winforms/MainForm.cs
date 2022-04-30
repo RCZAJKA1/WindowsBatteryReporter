@@ -41,7 +41,11 @@
         {
             this._logger.LogInformation("Create report button clicked.");
 
-            this._mainFormController.CreateBatteryReport();
+            using FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                this._mainFormController.CreateBatteryReport(folderBrowserDialog.SelectedPath);
+            }
         }
     }
 }

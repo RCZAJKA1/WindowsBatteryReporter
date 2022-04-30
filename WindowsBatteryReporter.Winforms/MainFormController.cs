@@ -35,12 +35,22 @@
         }
 
         /// <inheritdoc/>
-        public void CreateBatteryReport()
+        public void CreateBatteryReport(string folderPath)
         {
+            if (folderPath == null)
+            {
+                throw new ArgumentNullException(nameof(folderPath));
+            }
+
+            if (string.IsNullOrWhiteSpace(folderPath))
+            {
+                throw new ArgumentException("The argument cannot be empty or only contain white space.", nameof(folderPath));
+            }
+
             this._logger.LogInformation("MainFormController.CreateBatteryReport().");
 
             this._mainFormView.CreateReportButtonEnabled = false;
-            this._batteryService.CreateBatteryReport();
+            this._batteryService.CreateBatteryReport(folderPath);
             this._mainFormView.CreateReportButtonEnabled = true;
         }
 
