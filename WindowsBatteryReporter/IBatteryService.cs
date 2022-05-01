@@ -8,7 +8,7 @@
         /// <summary>
         ///     Creates a new battery report.
         /// </summary>
-        /// <returns></returns>
-        void CreateBatteryReportAsync();
+        /// <param name="folderPath">The folder path.</param>
+        void CreateBatteryReport(string folderPath);
     }
 }
