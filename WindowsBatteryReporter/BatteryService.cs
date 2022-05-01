@@ -21,7 +21,17 @@
             }
 
             DateTime now = DateTime.Now;
-            string fileName = $"battery-report-{now.Month}{now.Day}{now.Year}_{now.Hour}{now.Minute}{now.Second}.html";
+
+            string padZeroFormat = "{0:00}";
+
+            string month = string.Format(padZeroFormat, now.Month);
+            string day = string.Format(padZeroFormat, now.Day);
+            string year = string.Format(padZeroFormat, now.Year);
+            string hour = string.Format(padZeroFormat, now.Hour);
+            string min = string.Format(padZeroFormat, now.Minute);
+            string sec = string.Format(padZeroFormat, now.Second);
+
+            string fileName = $"battery-report-{month}{day}{year}_{hour}{min}{sec}.html";
             string filePath = Path.Combine(folderPath, fileName);
             string command = $"powercfg /batteryreport /output \"{filePath}\"";
 
@@ -32,13 +42,12 @@
                 CreateNoWindow = true
             };
 
-            using Process process = new Process
+            Process process = new Process
             {
                 StartInfo = processStartInfo
             };
 
             process.Start();
-            process.WaitForExit();
             //Process.Start(filePath);
         }
     }

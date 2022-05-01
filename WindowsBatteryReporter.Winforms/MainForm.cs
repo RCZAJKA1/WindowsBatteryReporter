@@ -47,5 +47,20 @@
                 this._mainFormController.CreateBatteryReport(folderBrowserDialog.SelectedPath);
             }
         }
+
+        /// <summary>
+        ///     Exits the application.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this._logger.LogInformation("Exit button clicked.");
+
+            if (!this.buttonCreateReport.Enabled)
+            {
+                // cancel
+            }
+        }
     }
 }
