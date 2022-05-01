@@ -57,9 +57,26 @@
         {
             this._logger.LogInformation("Exit button clicked.");
 
-            if (!this.buttonCreateReport.Enabled)
+            // Subsequently prompts user to confirm exit upon the Form.OnFormClosing event
+            this.Close();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                // cancel
+                DialogResult confirm = MessageBox.Show("Are you sure you want to exit?", "Exit Application", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (confirm == DialogResult.OK)
+                {
+                    this._logger.LogInformation("Exit application OK button clicked.");
+
+                    base.OnClosing(e);
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }

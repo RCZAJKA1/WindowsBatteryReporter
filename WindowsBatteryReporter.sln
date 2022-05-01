@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsBatteryReporter.Winforms", "WindowsBatteryReporter.Winforms\WindowsBatteryReporter.Winforms.csproj", "{E053E2F3-E12E-4AF0-B35D-CBCF47BF232B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsBatteryReporter", "WindowsBatteryReporter\WindowsBatteryReporter.csproj", "{0F18D54A-4579-4225-8818-9A17FC874673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsBatteryReporter", "WindowsBatteryReporter\WindowsBatteryReporter.csproj", "{0F18D54A-4579-4225-8818-9A17FC874673}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{668357F0-DC28-4CEB-9776-D274B250B46C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
