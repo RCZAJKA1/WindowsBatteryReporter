@@ -48,7 +48,8 @@ namespace WindowsBatteryReporter
                     .AddTransient<MainForm>()
                     .AddTransient<IBatteryService, BatteryService>()
                     .AddTransient<IMainFormView, MainFormView>()
-                    .AddTransient<IMainFormController, MainFormController>();
+                    .AddTransient<IMainFormController, MainFormController>()
+                    .AddTransient<IProcessService, ProcessService>();
                 });
         }
     }

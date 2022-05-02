@@ -9,6 +9,7 @@
         ///     Creates a new battery report.
         /// </summary>
         /// <param name="folderPath">The folder path.</param>
-        void CreateBatteryReport(string folderPath);
+        /// <returns>The file path of the battery report.</returns>
+        string CreateBatteryReport(string folderPath);
     }
 }

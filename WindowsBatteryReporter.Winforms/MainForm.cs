@@ -1,6 +1,8 @@
 ﻿namespace WindowsBatteryReporter
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Windows.Forms;
 
     using Microsoft.Extensions.Logging;
@@ -12,11 +14,15 @@
     /// </summary>
     public partial class MainForm : Form, IMainFormView
     {
+        /// <summary>
+        ///     The logger.
+        /// </summary>
         private readonly ILogger _logger;
-        private readonly IMainFormController _mainFormController;
 
-        /// <inheritdoc/>
-        public bool CreateReportButtonEnabled { get; set; }
+        /// <summary>
+        ///     The main form controller.
+        /// </summary>
+        private readonly IMainFormController _mainFormController;
 
         /// <summary>
         ///     Creates a new instance of the <see cref="MainForm"/> class.
@@ -32,6 +38,37 @@
             this.InitializeComponent();
         }
 
+        /// <inheritdoc/>
+        public bool CreateReportButtonEnabled
+        {
+            get => this.buttonCreateReport.Enabled;
+            set => this.buttonCreateReport.Enabled = value;
+        }
+
+        /// <inheritdoc/>
+        public IList<string> ReportPaths
+        {
+            get => this.listBoxMain.Items.Cast<String>().ToList();
+            set
+            {
+                if (value.Count > 0)
+                {
+                    this.listBoxMain.Items.AddRange((ListBox.ObjectCollection)value);
+                }
+                else
+                {
+                    this.listBoxMain.Items.Add((ListBox.ObjectCollection)value);
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public string StatusLabel
+        {
+            get => this.statusLabelProgress.Text;
+            set => this.statusLabelProgress.Text = value;
+        }
+
         /// <summary>
         ///     Handles the button click event for creating a battery report.
         /// </summary>
@@ -44,7 +81,20 @@
             using FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                this._mainFormController.CreateBatteryReport(folderBrowserDialog.SelectedPath);
+                this.StatusLabel = "Creating battery report...";
+
+                string reportPath = this._mainFormController.CreateBatteryReport(folderBrowserDialog.SelectedPath);
+
+                if (reportPath != null)
+                {
+                    this.StatusLabel = $"Report created: {reportPath}";
+                    this.ReportPaths.Add(reportPath);
+                }
+                else
+                {
+                    this._logger.LogError("Failed to create battery report.");
+                    this.StatusLabel = "Failed to create battery report.";
+                }
             }
         }
 
@@ -77,6 +127,21 @@
                 {
                     e.Cancel = true;
                 }
+            }
+        }
+
+        /// <summary>
+        ///     Opens the selected battery report file.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="e">The event arguments.</param>
+        private void listBoxMain_DoubleClick(object sender, EventArgs e)
+        {
+            string filePath = this.listBoxMain.SelectedItem.ToString();
+
+            if (!string.IsNullOrWhiteSpace(filePath))
+            {
+                this._mainFormController.OpenBatteryReport(filePath);
             }
         }
     }

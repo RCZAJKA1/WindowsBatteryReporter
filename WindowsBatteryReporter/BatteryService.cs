@@ -1,15 +1,39 @@
 ﻿namespace WindowsBatteryReporter
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
+
+    using Microsoft.Extensions.Logging;
 
     /// <inheritdoc cref="IBatteryService"/>
     public sealed class BatteryService : IBatteryService
     {
-        /// <inheritdoc/>
-        public void CreateBatteryReport(string folderPath)
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private readonly ILogger<BatteryService> _logger;
+
+        /// <summary>
+        ///     The process service.
+        /// </summary>
+        private readonly IProcessService _processService;
+
+        /// <summary>
+        ///     Creates a new instance of the <see cref="BatteryService"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <exception cref="ArgumentNullException">Throws if any injected dependencies are null.</exception>
+        public BatteryService(ILogger<BatteryService> logger, IProcessService processService)
         {
+            this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this._processService = processService ?? throw new ArgumentNullException(nameof(processService));
+        }
+
+        /// <inheritdoc/>
+        public string CreateBatteryReport(string folderPath)
+        {
+            this._logger.LogInformation("Creating battery report.");
+
             if (folderPath == null)
             {
                 throw new ArgumentNullException(nameof(folderPath));
@@ -33,22 +57,10 @@
 
             string fileName = $"battery-report-{month}{day}{year}_{hour}{min}{sec}.html";
             string filePath = Path.Combine(folderPath, fileName);
-            string command = $"powercfg /batteryreport /output \"{filePath}\"";
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd", "/c " + command)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
+            this._processService.CreateFileUsingCmd(filePath);
 
-            Process process = new Process
-            {
-                StartInfo = processStartInfo
-            };
-
-            process.Start();
-            //Process.Start(filePath);
+            return filePath;
         }
     }
 }
