@@ -88,6 +88,7 @@
                 if (reportPath != null)
                 {
                     this.StatusLabel = $"Report created: {reportPath}";
+                    // TODO: fix
                     this.ReportPaths.Add(reportPath);
                 }
                 else

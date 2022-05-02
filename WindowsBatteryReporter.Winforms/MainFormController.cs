@@ -86,6 +86,7 @@
                 throw new ArgumentException("The argument cannot be empty or only contain white space.", nameof(filePath));
             }
 
+            // TODO: move to service
             if (File.Exists(filePath))
             {
                 this._logger.LogInformation("File path exists. Running command.");
