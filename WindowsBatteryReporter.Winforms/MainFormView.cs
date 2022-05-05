@@ -1,6 +1,6 @@
 ﻿namespace WindowsBatteryReporter
 {
-    using System.Collections.Generic;
+    using static System.Windows.Forms.ListBox;
 
     /// <inheritdoc cref="IMainFormView"/>
     internal sealed class MainFormView : IMainFormView
@@ -9,7 +9,7 @@
         public bool CreateReportButtonEnabled { get; set; }
 
         /// <inheritdoc/>
-        public IList<string> ReportPaths { get; set; }
+        public ObjectCollection ReportPaths { get; set; }
 
         /// <inheritdoc/>
         public string StatusLabel { get; set; }

@@ -9,6 +9,8 @@
 
     using WindowsBatteryReporter.Winforms;
 
+    using static System.Windows.Forms.ListBox;
+
     /// <summary>
     ///     The main form.
     /// </summary>
@@ -46,18 +48,25 @@
         }
 
         /// <inheritdoc/>
-        public IList<string> ReportPaths
+        public ObjectCollection ReportPaths
         {
-            get => this.listBoxMain.Items.Cast<String>().ToList();
+            get => this.listBoxMain.Items;
             set
             {
-                if (value.Count > 0)
+                if (value.Count == 0)
                 {
-                    this.listBoxMain.Items.AddRange((ListBox.ObjectCollection)value);
+                    return;
                 }
-                else
+                else if (value.Count == 1)
+                {   
+                    this.listBoxMain.Items.Add(value);
+                }
+                else if (value.Count > 1)
                 {
-                    this.listBoxMain.Items.Add((ListBox.ObjectCollection)value);
+                    foreach (ObjectCollection item in value)
+                    {
+                        this.listBoxMain.Items.Add(item);
+                    }
                 }
             }
         }

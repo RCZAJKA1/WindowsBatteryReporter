@@ -1,6 +1,7 @@
 ﻿namespace WindowsBatteryReporter
 {
     using System.Collections.Generic;
+    using static System.Windows.Forms.ListBox;
 
     /// <summary>
     ///     Represents UI controls on the <see cref="MainForm"/>.
@@ -15,7 +16,7 @@
         /// <summary>
         ///     Gets and sets the report paths.
         /// </summary>
-        IList<string> ReportPaths { get; set; }
+        ObjectCollection ReportPaths { get; set; }
 
         /// <summary>
         ///     Gets and sets the status label.

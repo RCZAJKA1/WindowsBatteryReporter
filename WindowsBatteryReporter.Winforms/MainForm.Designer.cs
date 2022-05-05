@@ -43,9 +43,9 @@
             this.buttonCreateReport.BackColor = System.Drawing.Color.LightGray;
             this.buttonCreateReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCreateReport.Font = new System.Drawing.Font("Arial", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCreateReport.Location = new System.Drawing.Point(3, 705);
+            this.buttonCreateReport.Location = new System.Drawing.Point(3, 1029);
             this.buttonCreateReport.Name = "buttonCreateReport";
-            this.buttonCreateReport.Size = new System.Drawing.Size(117, 33);
+            this.buttonCreateReport.Size = new System.Drawing.Size(165, 52);
             this.buttonCreateReport.TabIndex = 1;
             this.buttonCreateReport.Text = "Create";
             this.buttonCreateReport.UseVisualStyleBackColor = false;
@@ -71,15 +71,15 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 8;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.243301F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.488391F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 761);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.21284F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.18697F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.536001F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1374, 1129);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // buttonExit
@@ -87,9 +87,9 @@
             this.buttonExit.BackColor = System.Drawing.Color.LightGray;
             this.buttonExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonExit.Font = new System.Drawing.Font("Arial", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonExit.Location = new System.Drawing.Point(864, 705);
+            this.buttonExit.Location = new System.Drawing.Point(1200, 1029);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(117, 33);
+            this.buttonExit.Size = new System.Drawing.Size(171, 52);
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = false;
@@ -99,11 +99,12 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.statusStripMain, 8);
             this.statusStripMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusStripMain.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabelProgress});
-            this.statusStripMain.Location = new System.Drawing.Point(0, 741);
+            this.statusStripMain.Location = new System.Drawing.Point(0, 1084);
             this.statusStripMain.Name = "statusStripMain";
-            this.statusStripMain.Size = new System.Drawing.Size(984, 20);
+            this.statusStripMain.Size = new System.Drawing.Size(1374, 45);
             this.statusStripMain.TabIndex = 3;
             this.statusStripMain.Text = "statusStrip1";
             // 
@@ -111,7 +112,7 @@
             // 
             this.statusLabelProgress.BackColor = System.Drawing.Color.Transparent;
             this.statusLabelProgress.Name = "statusLabelProgress";
-            this.statusLabelProgress.Size = new System.Drawing.Size(39, 15);
+            this.statusLabelProgress.Size = new System.Drawing.Size(78, 35);
             this.statusLabelProgress.Text = "Ready";
             this.statusLabelProgress.ToolTipText = "The application status";
             // 
@@ -121,21 +122,20 @@
             this.listBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxMain.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listBoxMain.FormattingEnabled = true;
-            this.listBoxMain.ItemHeight = 21;
+            this.listBoxMain.ItemHeight = 45;
             this.listBoxMain.Location = new System.Drawing.Point(3, 3);
             this.listBoxMain.Name = "listBoxMain";
             this.tableLayoutPanel1.SetRowSpan(this.listBoxMain, 3);
             this.listBoxMain.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxMain.Size = new System.Drawing.Size(978, 345);
+            this.listBoxMain.Size = new System.Drawing.Size(1368, 507);
             this.listBoxMain.TabIndex = 4;
             this.listBoxMain.DoubleClick += new System.EventHandler(this.listBoxMain_DoubleClick);
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(984, 761);
+            this.ClientSize = new System.Drawing.Size(1374, 1129);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MaximumSize = new System.Drawing.Size(1000, 800);
-            this.MinimumSize = new System.Drawing.Size(1000, 800);
+            this.MinimumSize = new System.Drawing.Size(1400, 1200);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Battery Reporter";
