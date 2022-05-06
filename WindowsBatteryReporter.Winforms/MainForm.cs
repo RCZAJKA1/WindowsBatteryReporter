@@ -1,8 +1,6 @@
 ﻿namespace WindowsBatteryReporter
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Windows.Forms;
 
     using Microsoft.Extensions.Logging;
@@ -51,24 +49,7 @@
         public ObjectCollection ReportPaths
         {
             get => this.listBoxMain.Items;
-            set
-            {
-                if (value.Count == 0)
-                {
-                    return;
-                }
-                else if (value.Count == 1)
-                {   
-                    this.listBoxMain.Items.Add(value);
-                }
-                else if (value.Count > 1)
-                {
-                    foreach (ObjectCollection item in value)
-                    {
-                        this.listBoxMain.Items.Add(item);
-                    }
-                }
-            }
+            set => this.listBoxMain.Items.Add(value);
         }
 
         /// <inheritdoc/>
