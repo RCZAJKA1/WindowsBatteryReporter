@@ -1,4 +1,4 @@
-﻿namespace WindowsBatteryReporter.Tests
+﻿namespace WindowsBatteryReporter.Common
 {
     using System;
 
@@ -20,7 +20,7 @@
         /// <param name="eventId">The event identifier.</param>
         /// <param name="message">The log message.</param>
         /// <param name="exception">The exception thrown, if applicable.</param>
-        public static void SetupLogger<T>(this Mock<ILogger<T>> mockLogger, LogLevel logLevel, EventId eventId, string message, Exception exception)
+        public static void SetupLog<T>(this Mock<ILogger<T>> mockLogger, LogLevel logLevel, EventId eventId, string message, Exception exception)
         {
             if (mockLogger == null)
             {

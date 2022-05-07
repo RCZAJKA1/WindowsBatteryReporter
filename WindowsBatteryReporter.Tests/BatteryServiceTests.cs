@@ -6,6 +6,8 @@
 
     using Moq;
 
+    using WindowsBatteryReporter.Common;
+
     using Xunit;
 
     public class BatteryServiceTests
@@ -55,7 +57,7 @@
         {
             string folderPath = null;
 
-            this._mockLogger.SetupLogger(LogLevel.Information, 0, "Creating battery report.", null);
+            this._mockLogger.SetupLog(LogLevel.Information, 0, "Creating battery report.", null);
 
             BatteryService batteryService = this.CreateService();
 
@@ -70,7 +72,7 @@
         {
             string folderPath = string.Empty;
 
-            this._mockLogger.SetupLogger(LogLevel.Information, 0, "Creating battery report.", null);
+            this._mockLogger.SetupLog(LogLevel.Information, 0, "Creating battery report.", null);
 
             BatteryService batteryService = this.CreateService();
 
@@ -85,7 +87,7 @@
         {
             string folderPath = " ";
 
-            this._mockLogger.SetupLogger(LogLevel.Information, 0, "Creating battery report.", null);
+            this._mockLogger.SetupLog(LogLevel.Information, 0, "Creating battery report.", null);
 
             BatteryService batteryService = this.CreateService();
 
@@ -100,7 +102,7 @@
         {
             string folderPath = "testFolder/Path/";
 
-            this._mockLogger.SetupLogger(LogLevel.Information, 0, "Creating battery report.", null);
+            this._mockLogger.SetupLog(LogLevel.Information, 0, "Creating battery report.", null);
 
             this._mockProcessService.Setup(x => x.CreateFileUsingCmd(It.IsAny<string>()));
 

@@ -1,8 +1,11 @@
 ﻿namespace WindowsBatteryReporter
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using static System.Windows.Forms.ListBox;
 
     /// <inheritdoc cref="IMainFormView"/>
+    [ExcludeFromCodeCoverage]
     internal sealed class MainFormView : IMainFormView
     {
         /// <inheritdoc/>

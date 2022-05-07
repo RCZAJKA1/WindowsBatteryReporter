@@ -7,7 +7,7 @@
     using Microsoft.Extensions.Logging;
 
     /// <inheritdoc cref="IMainFormController">
-    internal sealed class MainFormController : IMainFormController
+    public sealed class MainFormController : IMainFormController
     {
         /// <summary>
         ///     The logger.
@@ -41,6 +41,8 @@
         /// <inheritdoc/>
         public string CreateBatteryReport(string folderPath)
         {
+            this._logger.LogInformation($"MainFormController.CreateBatteryReport({folderPath}).");
+
             if (folderPath == null)
             {
                 throw new ArgumentNullException(nameof(folderPath));
@@ -51,8 +53,6 @@
                 throw new ArgumentException("The argument cannot be empty or only contain white space.", nameof(folderPath));
             }
 
-            this._logger.LogInformation("MainFormController.CreateBatteryReport().");
-
             string reportPath = null;
             try
             {
@@ -61,7 +61,7 @@
             }
             catch
             {
-                this._mainFormView.StatusLabel = "Failed to created battery report.";
+                this._mainFormView.StatusLabel = "Failed to create battery report.";
             }
             finally
             {

@@ -26,7 +26,7 @@
         /// <inheritdoc/>
         public void CreateFileUsingCmd(string filePath)
         {
-            this._logger.LogInformation($" file {filePath}.");
+            this._logger.LogInformation($"Creating file {filePath} via cmd.");
 
             if (filePath == null)
             {

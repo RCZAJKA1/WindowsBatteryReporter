@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WindowsBatteryReporter.Common\WindowsBatteryReporter.Common.csproj" />
-    <ProjectReference Include="..\WindowsBatteryReporter\WindowsBatteryReporter.csproj" />
+    <ProjectReference Include="..\WindowsBatteryReporter.Winforms\WindowsBatteryReporter.Winforms.csproj" />
   </ItemGroup>
 
 </Project>
