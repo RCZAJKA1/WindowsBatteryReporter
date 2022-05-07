@@ -9,12 +9,13 @@
         ///     Creates a new battery report.
         /// </summary>
         /// <param name="folderPath">The folder path.</param>
-        void CreateBatteryReport(string folderPath);
+        /// <returns>The file path of the battery report.</returns>
+        string CreateBatteryReport(string folderPath);
 
-        ///// <summary>
-        /////     Enables or disables the create report button.
-        ///// </summary>
-        ///// <param name="enable">The bool that determines if the button is enabled or disabled.</param>
-        //public void SetCreateReportButtonEnabled(bool enable);
+        /// <summary>
+        ///     Opens the specified battery report file.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        void OpenBatteryReport(string filePath);
     }
 }
