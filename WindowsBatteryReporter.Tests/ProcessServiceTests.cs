@@ -46,7 +46,7 @@
         {
             string filePath = null;
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"Creating file {filePath} via cmd.", null);
+            this._mockLogger.SetupInformationLogging($"Creating file {filePath} via cmd.");
 
             ProcessService service = this.CreateService();
 
@@ -61,7 +61,7 @@
         {
             string filePath = String.Empty;
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"Creating file {filePath} via cmd.", null);
+            this._mockLogger.SetupInformationLogging($"Creating file {filePath} via cmd.");
 
             ProcessService service = this.CreateService();
 
@@ -76,7 +76,7 @@
         {
             string filePath = " ";
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"Creating file {filePath} via cmd.", null);
+            this._mockLogger.SetupInformationLogging($"Creating file {filePath} via cmd.");
 
             ProcessService service = this.CreateService();
 

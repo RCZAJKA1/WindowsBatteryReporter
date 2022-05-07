@@ -69,7 +69,7 @@
         {
             string folderPath = null;
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"MainFormController.CreateBatteryReport({folderPath}).", null);
+            this._mockLogger.SetupInformationLogging($"MainFormController.CreateBatteryReport({folderPath}).");
 
             MainFormController controller = this.CreateMainFormController();
 
@@ -85,7 +85,7 @@
         {
             string folderPath = string.Empty;
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"MainFormController.CreateBatteryReport({folderPath}).", null);
+            this._mockLogger.SetupInformationLogging($"MainFormController.CreateBatteryReport({folderPath}).");
 
             MainFormController controller = this.CreateMainFormController();
 
@@ -102,7 +102,7 @@
             string folderPath = "test/FolderPath/";
             string reportPath = $"{folderPath}fileName.html";
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"MainFormController.CreateBatteryReport({folderPath}).", null);
+            this._mockLogger.SetupInformationLogging($"MainFormController.CreateBatteryReport({folderPath}).");
             this._mockMainFormView.SetupSet(x => x.CreateReportButtonEnabled = false);
             this._mockBatteryService.Setup(x => x.CreateBatteryReport(It.Is<string>(y => y == folderPath))).Returns(reportPath);
             this._mockMainFormView.SetupSet(x => x.CreateReportButtonEnabled = true);
@@ -122,7 +122,7 @@
         {
             string folderPath = "test/FolderPath/";
 
-            this._mockLogger.SetupLog(LogLevel.Information, 0, $"MainFormController.CreateBatteryReport({folderPath}).", null);
+            this._mockLogger.SetupInformationLogging($"MainFormController.CreateBatteryReport({folderPath}).");
             this._mockMainFormView.SetupSet(x => x.CreateReportButtonEnabled = false);
             this._mockBatteryService.Setup(x => x.CreateBatteryReport(It.Is<string>(y => y == folderPath))).Throws(() => new InvalidOperationException("testException"));
             this._mockMainFormView.SetupSet(x => x.StatusLabel = "Failed to create battery report.");
