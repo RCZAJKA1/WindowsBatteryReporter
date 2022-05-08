@@ -1,7 +1,6 @@
 ﻿namespace WindowsBatteryReporter.Winforms
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
 
     using Microsoft.Extensions.Logging;
@@ -25,17 +24,23 @@
         private readonly IBatteryService _batteryService;
 
         /// <summary>
+        ///     The process service.
+        /// </summary>
+        private readonly IProcessService _processService;
+
+        /// <summary>
         ///     Creates a new instance of the <see cref="MainFormController"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <param name="mainFormView">The main form view.</param>
         /// <param name="batteryService">The battery service.</param>
         /// <exception cref="ArgumentNullException">Throws if any injected dependencies are null.</exception>
-        public MainFormController(ILogger<MainFormController> logger, IMainFormView mainFormView, IBatteryService batteryService)
+        public MainFormController(ILogger<MainFormController> logger, IMainFormView mainFormView, IBatteryService batteryService, IProcessService processService)
         {
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this._mainFormView = mainFormView ?? throw new ArgumentNullException(nameof(mainFormView));
             this._batteryService = batteryService ?? throw new ArgumentNullException(nameof(batteryService));
+            this._processService = processService ?? throw new ArgumentNullException(nameof(processService));
         }
 
         /// <inheritdoc/>
@@ -91,13 +96,7 @@
             {
                 this._logger.LogInformation("File path exists. Running command.");
 
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    Arguments = filePath,
-                    FileName = "explorer.exe"
-                };
-
-                Process.Start(startInfo);
+                this._processService.StartProcess("explorer.exe", new string[] { filePath });
             }
             else
             {

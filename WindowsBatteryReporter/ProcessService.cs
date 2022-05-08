@@ -99,5 +99,34 @@
                 throw;
             }
         }
+
+        /// <inheritdoc/>
+        public void StartProcess(string executable, string[] arguments)
+        {
+            this._logger.LogInformation($"Starting process executable '{executable}' with arguments '{string.Join(',', arguments)}'.");
+
+            if (executable == null)
+            {
+                throw new ArgumentNullException(nameof(executable));
+            }
+
+            if (string.IsNullOrWhiteSpace(executable))
+            {
+                throw new ArgumentException("The argument cannot be empty or only contain white space.", nameof(executable));
+            }
+
+            if (arguments == null)
+            {
+                throw new ArgumentNullException(nameof(arguments));
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                Arguments = string.Join(' ', arguments),
+                FileName = executable
+            };
+
+            Process.Start(startInfo);
+        }
     }
 }

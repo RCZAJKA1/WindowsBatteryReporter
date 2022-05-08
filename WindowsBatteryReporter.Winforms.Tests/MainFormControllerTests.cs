@@ -17,6 +17,7 @@
         private readonly Mock<ILogger<MainFormController>> _mockLogger;
         private readonly Mock<IMainFormView> _mockMainFormView;
         private readonly Mock<IBatteryService> _mockBatteryService;
+        private readonly Mock<IProcessService> _mockProcessService;
 
         public MainFormControllerTests()
         {
@@ -25,12 +26,13 @@
             this._mockLogger = this._mockRepository.Create<ILogger<MainFormController>>();
             this._mockMainFormView = this._mockRepository.Create<IMainFormView>();
             this._mockBatteryService = this._mockRepository.Create<IBatteryService>();
+            this._mockProcessService = this._mockRepository.Create<IProcessService>();
         }
 
         [Fact]
         public void Ctor_LoggerNull_Throws()
         {
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(null, this._mockMainFormView.Object, this._mockBatteryService.Object));
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(null, this._mockMainFormView.Object, this._mockBatteryService.Object, this._mockProcessService.Object));
             Assert.Equal("Value cannot be null. (Parameter 'logger')", exception.Message);
 
             this._mockRepository.VerifyAll();
@@ -39,7 +41,7 @@
         [Fact]
         public void Ctor_MainFormViewNull_Throws()
         {
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(this._mockLogger.Object, null, this._mockBatteryService.Object));
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(this._mockLogger.Object, null, this._mockBatteryService.Object, this._mockProcessService.Object));
             Assert.Equal("Value cannot be null. (Parameter 'mainFormView')", exception.Message);
 
             this._mockRepository.VerifyAll();
@@ -48,8 +50,17 @@
         [Fact]
         public void Ctor_BatteryServiceNull_Throws()
         {
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(this._mockLogger.Object, this._mockMainFormView.Object, null));
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(this._mockLogger.Object, this._mockMainFormView.Object, null, this._mockProcessService.Object));
             Assert.Equal("Value cannot be null. (Parameter 'batteryService')", exception.Message);
+
+            this._mockRepository.VerifyAll();
+        }
+
+        [Fact]
+        public void Ctor_ProcessServiceNull_Throws()
+        {
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new MainFormController(this._mockLogger.Object, this._mockMainFormView.Object, this._mockBatteryService.Object, null));
+            Assert.Equal("Value cannot be null. (Parameter 'processService')", exception.Message);
 
             this._mockRepository.VerifyAll();
         }
@@ -137,12 +148,45 @@
             this._mockRepository.VerifyAll();
         }
 
+        [Fact]
+        public void OpenBatterReport_FilePathNull_Throws()
+        {
+            string filePath = null;
+
+            this._mockLogger.SetupInformationLogging("Opening battery report.");
+
+            MainFormController controller = this.CreateMainFormController();
+
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => controller.OpenBatteryReport(filePath));
+
+            Assert.Equal("Value cannot be null. (Parameter 'filePath')", exception.Message);
+
+            this._mockRepository.VerifyAll();
+        }
+
+        [Fact]
+        public void OpenBatterReport_FilePathEmpty_Throws()
+        {
+            string filePath = string.Empty;
+
+            this._mockLogger.SetupInformationLogging("Opening battery report.");
+
+            MainFormController controller = this.CreateMainFormController();
+
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => controller.OpenBatteryReport(filePath));
+
+            Assert.Equal("The argument cannot be empty or only contain white space. (Parameter 'filePath')", exception.Message);
+
+            this._mockRepository.VerifyAll();
+        }
+
         private MainFormController CreateMainFormController()
         {
             return new MainFormController(
                 this._mockLogger.Object,
                 this._mockMainFormView.Object,
-                this._mockBatteryService.Object);
+                this._mockBatteryService.Object,
+                this._mockProcessService.Object);
         }
     }
 }

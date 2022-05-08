@@ -23,6 +23,11 @@
                 throw new ArgumentNullException(nameof(control));
             }
 
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             if (control.InvokeRequired)
             {
                 control.Invoke(action);
